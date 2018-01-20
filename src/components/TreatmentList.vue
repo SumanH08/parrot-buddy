@@ -1,6 +1,10 @@
 <script>
 var TreatmentList = {
-  name: "treatment-list"
+  name: "treatment-list",
+  components: {
+    info: "Info",
+    treatment: "Treatment"
+  }
 }
 export default TreatmentList;
 </script>
