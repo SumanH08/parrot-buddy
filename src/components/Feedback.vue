@@ -1,7 +1,10 @@
 <template>
   <div>
     <i class="fa fa-comment-o" aria-hidden="true"></i>
-    <p>Have some feedback for us?<br> <span><a href="#">Tap here</a></span> to drop us a note</p>
+    <span>Have some feedback for us?<br><a href="#">Tap here</a> to drop us a note</span>
+    <div class="input-group">
+      <button class="btn" data-toggle="dropdown"><span class="input-group-btn"></span>Edit your treatment shortcuts</button>
+    </div>
   </div>
 </template>
 
