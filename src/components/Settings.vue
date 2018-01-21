@@ -1,6 +1,5 @@
 <template>
   <div>
-    Settings component
     <feedback></feedback>
     <treatment-list></treatment-list>
   </div>
