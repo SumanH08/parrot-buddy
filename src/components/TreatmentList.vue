@@ -10,7 +10,7 @@
         </tr>
       </thead>
       <tbody>
-        <treatment v-bind:toggle="SettingsStore.settings[0].status" v-bind:treatment="SettingsStore.settings[0].name" v-bind:dropdown="SettingsStore.settings[0].customType"></treatment>
+        <treatment v-for="item in SettingsStore.settings" v-bind:toggle="item.status" v-bind:treatment="item.name" v-bind:dropdown="item.customType"></treatment>
       </tbody>
     </table>
   </div>
