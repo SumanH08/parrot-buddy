@@ -2,16 +2,13 @@
   <div>
     Settings component
     <feedback></feedback>
-    <info></info>
-    <treatment></treatment>
+    <treatment-list></treatment-list>
   </div>
 </template>
 
 <script>
 import Feedback from "./Feedback.vue"
 import TreatmentList from "./TreatmentList.vue"
-import Treatment from "./Treatment.vue"
-import Info from "./Info.vue"
 import SettingsStore from "./../stores/SettingsStore.js"
 
 export default {
@@ -19,8 +16,6 @@ export default {
   components: {
     "feedback": Feedback,
     "treatment-list": TreatmentList,
-    "info": Info,
-    "treatment": Treatment
   },
   data () {
     return {
