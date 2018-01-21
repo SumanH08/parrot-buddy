@@ -2,7 +2,7 @@
   <div>
     <tabs :options="{ useUrlFragment: false }">
        <tab name="Recent">
-           Recent content
+           <recent></recent>
        </tab>
        <tab name="Trends" :is-disabled="true">
            Trends content
@@ -16,10 +16,12 @@
 
 <script>
 import Settings from "./Settings.vue"
+import Recent from "./Recent.vue"
 var Master = {
   name: "master",
   components: {
-    "Settings": Settings
+    "Settings": Settings,
+    "Recent": Recent
   }
 }
 export default Master;
