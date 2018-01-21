@@ -17,10 +17,5 @@ export default {
     "feedback": Feedback,
     "treatment-list": TreatmentList,
   },
-  data () {
-    return {
-      SettingsStore: SettingsStore
-    }
-  }
 }
 </script>
