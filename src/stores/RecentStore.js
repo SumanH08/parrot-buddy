@@ -23,7 +23,7 @@ var RecentStore = {
   {
       date: "2017-11-22",
       dayExists: true,
-      dayType: 'Good',
+      dayType: 'Bad',
       activeLevel: 'Full',
       treatment: ['Sleeping', 'Lemon Tea'],
       notes: ''
@@ -31,7 +31,7 @@ var RecentStore = {
   {
       date: "2017-11-21",
       dayExists: true,
-      dayType: 'Good',
+      dayType: 'Mig',
       activeLevel: 'Full',
       treatment: ['Dark Room Rest'],
       notes: ''
@@ -44,7 +44,7 @@ var RecentStore = {
       treatment: [ ],
       notes: ''
   }
-  ]
+]
 }
 
 export default RecentStore;
