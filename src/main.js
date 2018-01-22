@@ -4,8 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import {Tabs, Tab} from 'vue-tabs-component';
+import Toasted from 'vue-toasted';
 Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
+var Options = {
+  position: 'bottom-center'
+}
+Vue.use(Toasted, Options);
 
 import './assets/tabs.css'
 

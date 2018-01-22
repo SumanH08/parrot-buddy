@@ -99,6 +99,7 @@ var RecentCard = {
         treatmentSelected: this.treatmentSelected,
         message: this.message
       }
+      this.$toasted.show("Changes to " + this.date + " are saved");
       console.log(treatmentObj);
     }
   }
