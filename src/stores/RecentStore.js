@@ -10,7 +10,7 @@ var RecentStore = {
                               //      "Slowed Down" -> 'Half'
                               //      "Missed Actitivies" ->  'None'
       treatment: [ 'Sumatriptan', 'Topiramate'], // an array of string of treatment names. This represents the treatments selected for this day.
-      notes: ''
+      notes: 'Hola amigo'
   },
   {
       date: "2017-11-23",
@@ -23,7 +23,7 @@ var RecentStore = {
   {
       date: "2017-11-22",
       dayExists: true,
-      dayType: 'Bad',
+      dayType: 'Okay',
       activeLevel: 'Full',
       treatment: ['Sleeping', 'Lemon Tea'],
       notes: ''

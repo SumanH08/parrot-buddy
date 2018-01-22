@@ -1,10 +1,15 @@
 <template>
 <div>
-  <!-- <p>{{date}} {{dayExists}} {{dayType}} {{activeLevel}} {{treatment}} {{notes}}
-    </p> -->
-  <div v-on:click="expandCard">
-    <i class="fa fa-question-circle" aria-hidden="true"></i>
-    <span>How was your {{date}}?</span>
+  <div v-if="!isExpanded">
+    <div v-if="dayExists" v-on:click="expandCard">
+      <div>{{dayType}}</div>
+      <p>{{date}}</p>
+      <p>{{activeLevelLabel[activeLevel]}}</p>
+    </div>
+    <div v-else v-on:click="expandCard">
+      <i class="fa fa-question-circle" aria-hidden="true"></i>
+      <span>How was your {{date}}?</span>
+    </div>
   </div>
   <div v-if="isExpanded">
     <table class="table">
@@ -17,7 +22,7 @@
         <tr>
           <td v-on:click="selectMood('Good')" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''">Good</td>
           <td v-on:click="selectMood('Okay')" v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''">Okay</td>
-          <td v-on:click="selectMood('Bad')" v-bind:class="moodSelected == 'Bad' ? 'bad-mood' : ''">Bad</td>
+          <td v-on:click="selectMood('Mig')" v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''">Mig</td>
         </tr>
       </tbody>
     </table>
@@ -61,8 +66,20 @@ var RecentCard = {
       activeLevelSelected: "Full",
       treatmentSelected: [],
       message: "",
+      activeLevelLabel: {
+        'Full': 'Active',
+        'Half': 'Slower',
+        'None': 'Missed'
+      },
       SettingsStore: SettingsStore
     }
+  },
+  created: function() {
+    console.log("Virtual DOM created");
+    this.moodSelected = this.dayType;
+    this.activeLevelSelected = this.activeLevel;
+    this.treatmentSelected = this.treatment;
+    this.message = this.notes;
   },
   methods: {
     expandCard: function() {
@@ -101,6 +118,7 @@ var RecentCard = {
       }
       this.$toasted.show("Changes to " + this.date + " are saved");
       console.log(treatmentObj);
+      this.isExpanded = false;
     }
   }
 }
@@ -118,7 +136,7 @@ export default RecentCard;
 }
 
 .bad-mood {
-  color: yellow;
+  color: indigo;
 }
 
 .activeLevelFull {

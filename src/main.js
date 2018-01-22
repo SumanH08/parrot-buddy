@@ -8,7 +8,8 @@ import Toasted from 'vue-toasted';
 Vue.component('tabs', Tabs);
 Vue.component('tab', Tab);
 var Options = {
-  position: 'bottom-center'
+  position: 'bottom-center',
+  duration: 3000
 }
 Vue.use(Toasted, Options);
 
