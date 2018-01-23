@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="settings">
     <info></info>
     <table class="table">
       <thead>
@@ -34,3 +34,25 @@ var TreatmentList = {
 }
 export default TreatmentList;
 </script>
+
+<style>
+.settings {
+  background-color: #37586C;
+  color: white;
+  border: 1px solid;
+  border-color: #37586C;
+  border-radius: 12px;
+}
+
+.table th {
+  border-top: None;
+}
+
+.table thead th {
+  border-bottom: None;
+}
+
+.table td {
+  border-top: 0.1px solid #eceeef;
+}
+</style>

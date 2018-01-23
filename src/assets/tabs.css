@@ -45,7 +45,7 @@
 
 @media (min-width: 700px) {
   .tabs-component-tab {
-    background-color: #fff;
+    background-color: #48657C;
     border: solid 1px #ddd;
     border-radius: 3px 3px 0 0;
     margin-right: .5em;
@@ -75,10 +75,9 @@
 @media (min-width: 700px) {
   .tabs-component-panels {
     border-top-left-radius: 0;
-    background-color: #fff;
+    background-color: #48657C;
     border: solid 1px #ddd;
     border-radius: 0 6px 6px 6px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .05);
-    padding: 4em 2em;
   }
 }

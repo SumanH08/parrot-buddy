@@ -12,8 +12,10 @@ var Options = {
   duration: 3000
 }
 Vue.use(Toasted, Options);
+import ToggleButton from 'vue-js-toggle-button';
+Vue.use(ToggleButton);
 
-import './assets/tabs.css'
+import './assets/tabs.css';
 
 Vue.config.productionTip = false
 

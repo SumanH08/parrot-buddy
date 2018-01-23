@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <!-- <div class="container"> -->
+  <div class="backdrop">
     <tabs :options="{ useUrlFragment: false }">
        <tab name="Recent">
            <recent></recent>
@@ -11,7 +12,8 @@
            <settings></settings>
        </tab>
    </tabs>
-  </div>
+ </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -26,3 +28,13 @@ var Master = {
 }
 export default Master;
 </script>
+
+<style>
+.container {
+  background-color: #48657C;
+}
+
+/* .backdrop {
+  background-color: #48657C;
+} */
+</style>
