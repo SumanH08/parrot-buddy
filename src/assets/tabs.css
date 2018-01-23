@@ -6,6 +6,7 @@
   border: solid 1px #ddd;
   border-radius: 6px;
   margin-bottom: 5px;
+  background-color: #48657C;
 }
 
 @media (min-width: 700px) {

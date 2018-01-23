@@ -3,7 +3,9 @@
   <div v-if="!isExpanded">
     <div class="logged-card row" v-if="dayExists" v-on:click="expandCard">
       <div class="col-sm">
-        <div v-html=dayTypeEmoji[dayType]></div>
+        <div v-if="dayType == 'Good'" class="good-mood" v-html=dayTypeEmoji[dayType]></div>
+        <div v-else-if="dayType == 'Okay'" class="okay-mood" v-html=dayTypeEmoji[dayType]></div>
+        <div v-else="dayType == 'Mig'" class="bad-mood" v-html=dayTypeEmoji[dayType]></div>
       </div>
       <div class="col-sm">
         <p>{{ date | moment("dddd, MMMM Do") }}</p>
@@ -12,6 +14,7 @@
           <div v-else-if="activeLevelLabel[activeLevel] == 'Slower'" class="logged-half">{{activeLevelLabel[activeLevel]}}</div>
           <div v-else="activeLevelLabel[activeLevel] == 'Missed'" class="logged-missed">{{activeLevelLabel[activeLevel]}}</div>
         </div>
+        <span class="treatmentSelected" v-for="item in treatment">{{item}}</span>
       </div>
     </div>
     <div v-else v-on:click="expandCard">
@@ -20,6 +23,7 @@
     </div>
   </div>
   <div v-if="isExpanded">
+    <div class="ask-how">How was your {{ date | moment("dddd, MMMM Do") }}?</div>
     <table class="table">
       <tbody>
         <tr>
@@ -93,7 +97,6 @@ var RecentCard = {
     this.activeLevelSelected = this.activeLevel;
     this.treatmentSelected = this.treatment;
     this.message = this.notes;
-    console.log(this.dayTypeEmoji[this.dayType]);
   },
   methods: {
     expandCard: function() {
@@ -146,15 +149,15 @@ export default RecentCard;
 }
 
 .good-mood {
-  color: green;
+  color:  #A5D4DC;
 }
 
 .okay-mood {
-  color: blue;
+  color: #FBD751;
 }
 
 .bad-mood {
-  color: indigo;
+  color: #F09F5A;
 }
 
 .activeLevelFull {
@@ -170,7 +173,12 @@ export default RecentCard;
 }
 
 .treatmentSelected {
-  color: orange;
+  display: inline-block;
+  color: white;
+  background-color: #37586C;
+  border-radius: 6px;
+  margin: 3px;
+  padding: 6px 12px 6px 12px;
 }
 
 .highlightTreatment {
@@ -185,6 +193,9 @@ export default RecentCard;
   background-color: #323C4A;
   margin: 12px;
   padding: 12px;
+  border: 1px solid #585F66;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
 .logged-full {
@@ -201,6 +212,9 @@ export default RecentCard;
 }
 
 .activity-level-div {
+  text-align: center;
+}
+.ask-how {
   text-align: center;
 }
 
