@@ -1,8 +1,8 @@
 <template>
-<div>
+<div class="recent">
   <div v-if="!isExpanded">
     <div v-if="dayExists" v-on:click="expandCard">
-      <div>{{dayType}}</div>
+      <div>{{dayTypeEmoji[dayType]}}</div>
       <p>{{date}}</p>
       <p>{{activeLevelLabel[activeLevel]}}</p>
     </div>
@@ -71,6 +71,11 @@ var RecentCard = {
         'Half': 'Slower',
         'None': 'Missed'
       },
+      dayTypeEmoji: {
+        'Good': '<i class="fa fa-smile-o" aria-hidden="true"></i>',
+        'Okay':  '<i class="fa fa-meh-o" aria-hidden="true">',
+        'Mig':  '<i class="fa fa-frown-o" aria-hidden="true"></i>'
+      },
       SettingsStore: SettingsStore
     }
   },
@@ -80,6 +85,7 @@ var RecentCard = {
     this.activeLevelSelected = this.activeLevel;
     this.treatmentSelected = this.treatment;
     this.message = this.notes;
+    console.log(this.dayTypeEmoji[this.dayType]);
   },
   methods: {
     expandCard: function() {
@@ -127,6 +133,10 @@ export default RecentCard;
 </script>
 
 <style>
+.recent {
+  color: white;
+}
+
 .good-mood {
   color: green;
 }

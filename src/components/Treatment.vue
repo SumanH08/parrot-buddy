@@ -1,6 +1,10 @@
 <template>
 <tr>
-  <td><input type="checkbox" v-bind:checked="toggle" data-toggle="toggle" data-on=""></td>
+  <td>
+    <div class="main">
+      <toggle-button :color="{checked: '#52E0D1', unchecked: '#2C343E'}" />
+    </div>
+  </td>
   <td>{{treatment}}</td>
   <td>
     <div class="dropdown">
@@ -22,3 +26,7 @@ var Treatment = {
 }
 export default Treatment;
 </script>
+<!--
+<style>
+
+</style> -->
