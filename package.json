@@ -14,8 +14,10 @@
   },
   "dependencies": {
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "moment": "^2.20.1",
+    "request": "^2.83.0",
     "vue": "^2.5.2",
     "vue-js-toggle-button": "^1.2.2",
     "vue-router": "^3.0.1",

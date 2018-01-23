@@ -1,10 +1,13 @@
 var bodyParser = require('body-parser')
 const fs = require('fs')
 const express = require('express')
+var cors = require('cors')
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+
+app.use(cors())
 
 app.get('/api/recent', function(req, res) {
     res.set("Content-Type", "application/json");
@@ -41,7 +44,9 @@ app.put('/api/settings', function(req, res) {
     var userObj = req.body;
 
     settings = settings.map(function(obj) {
-      if(obj.Name == userObj.Name) {
+      console.log(obj);
+      console.log(userObj);
+      if(obj.name == userObj.name) {
         return userObj;
       }
 
