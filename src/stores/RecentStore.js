@@ -16,7 +16,7 @@ var RecentStore = {
       date: "2017-11-23",
       dayExists: true,
       dayType: 'Good',
-      activeLevel: 'Full',
+      activeLevel: 'Half',
       treatment: ['Sumatriptan', 'Running'],
       notes: ''
   },
@@ -32,7 +32,7 @@ var RecentStore = {
       date: "2017-11-21",
       dayExists: true,
       dayType: 'Mig',
-      activeLevel: 'Full',
+      activeLevel: 'None',
       treatment: ['Dark Room Rest'],
       notes: ''
   },

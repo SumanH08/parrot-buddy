@@ -1,10 +1,18 @@
 <template>
 <div class="recent">
   <div v-if="!isExpanded">
-    <div v-if="dayExists" v-on:click="expandCard">
-      <div>{{dayTypeEmoji[dayType]}}</div>
-      <p>{{date}}</p>
-      <p>{{activeLevelLabel[activeLevel]}}</p>
+    <div class="logged-card row" v-if="dayExists" v-on:click="expandCard">
+      <div class="col-sm">
+        <div v-html=dayTypeEmoji[dayType]></div>
+      </div>
+      <div class="col-sm">
+        <p>{{ date | moment("dddd, MMMM Do") }}</p>
+        <div class="activity-level-div">
+          <div v-if="activeLevelLabel[activeLevel] == 'Active'" class="logged-full">{{activeLevelLabel[activeLevel]}}</div>
+          <div v-else-if="activeLevelLabel[activeLevel] == 'Slower'" class="logged-half">{{activeLevelLabel[activeLevel]}}</div>
+          <div v-else="activeLevelLabel[activeLevel] == 'Missed'" class="logged-missed">{{activeLevelLabel[activeLevel]}}</div>
+        </div>
+      </div>
     </div>
     <div v-else v-on:click="expandCard">
       <i class="fa fa-question-circle" aria-hidden="true"></i>
@@ -15,9 +23,9 @@
     <table class="table">
       <tbody>
         <tr>
-          <td><i class="fa fa-smile-o" aria-hidden="true"></i></td>
-          <td><i class="fa fa-meh-o" aria-hidden="true"></i></td>
-          <td><i class="fa fa-frown-o" aria-hidden="true"></i></td>
+          <td><i class="fa fa-smile-o fa-3x" aria-hidden="true"></i></td>
+          <td><i class="fa fa-meh-o fa-3x" aria-hidden="true"></i></td>
+          <td><i class="fa fa-frown-o fa-3x" aria-hidden="true"></i></td>
         </tr>
         <tr>
           <td v-on:click="selectMood('Good')" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''">Good</td>
@@ -72,9 +80,9 @@ var RecentCard = {
         'None': 'Missed'
       },
       dayTypeEmoji: {
-        'Good': '<i class="fa fa-smile-o" aria-hidden="true"></i>',
-        'Okay':  '<i class="fa fa-meh-o" aria-hidden="true">',
-        'Mig':  '<i class="fa fa-frown-o" aria-hidden="true"></i>'
+        'Good': '<i class="fa fa-smile-o fa-3x" aria-hidden="true"></i>',
+        'Okay': '<i class="fa fa-meh-o fa-3x" aria-hidden="true">',
+        'Mig': '<i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>'
       },
       SettingsStore: SettingsStore
     }
@@ -114,7 +122,7 @@ var RecentCard = {
     highlightTreatmentSelected: function(treatmentSelected) {
       return this.treatmentSelected.indexOf(treatmentSelected) > -1 ? "highlightTreatment" : "removeTreatment";
     },
-    done: function(){
+    done: function() {
       var treatmentObj = {};
       treatmentObj = {
         moodSelected: this.moodSelected,
@@ -172,4 +180,28 @@ export default RecentCard;
 .removeTreatment {
   color: grey;
 }
+
+.logged-card {
+  background-color: #323C4A;
+  margin: 12px;
+  padding: 12px;
+}
+
+.logged-full {
+  background-color: #A5D4DC;
+  border-radius: 6px;
+}
+.logged-half {
+  background-color: #F09F5A;
+  border-radius: 6px;
+}
+.logged-missed {
+  background-color: #FBD751;
+  border-radius: 6px;
+}
+
+.activity-level-div {
+  text-align: center;
+}
+
 </style>

@@ -15,6 +15,8 @@ Vue.use(Toasted, Options);
 import ToggleButton from 'vue-js-toggle-button';
 Vue.use(ToggleButton);
 
+Vue.use(require('vue-moment'));
+
 import './assets/tabs.css';
 
 Vue.config.productionTip = false
