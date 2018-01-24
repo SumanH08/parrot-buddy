@@ -173,10 +173,12 @@ var RecentCard = {
     done: function() {
       var treatmentObj = {};
       treatmentObj = {
-        moodSelected: this.moodSelected,
-        activeLevelSelected: this.activeLevelSelected,
-        treatmentSelected: this.treatmentSelected,
-        message: this.message
+        date: this.date,
+        dayExists: true,
+        dayType: this.moodSelected,
+        activeLevel: this.activeLevelSelected,
+        treatment: this.treatmentSelected,
+        notes: this.message
       }
       RecentStore.putRecentToAPI(treatmentObj);
       this.$toasted.show("Changes to " + moment(this.date).format("dddd, MMMM D") + " are saved");
