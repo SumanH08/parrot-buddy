@@ -63,8 +63,7 @@
         </tbody>
       </table>
       <p class="headings">Treatment(s) Used </p>
-      <span v-if="!showAll" class="highlightTreatment" v-for="item in this.treatment">{{item}}</span>
-      <span class="removeTreatment" v-for="item in this.SettingsStore.settings" v-if="item.status && !showAll">{{item.name}}</span>
+      <span v-for="item in mergeTreatments()" v-if="!showAll" v-on:click="selectTreatment(item)" v-bind:class="highlightTreatmentSelected(item)">{{item}}</span>
       <div v-on:click="showAllExpand()"><p class="show-all" v-if="!showAllClicked">Show All...</p><span v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
       <div><p class="headings" style="margin-top:24px">Notes</p><textarea v-model="message" rows="2" cols="50">Enter text here...</textarea></div>
       <div style="text-align: right;">
@@ -127,6 +126,16 @@ var RecentCard = {
       console.log("This is showall");
           this.showAll = true;
           this.showAllClicked = true;
+    },
+    mergeTreatments() {
+      var merge = [];
+      var self = this;
+      this.SettingsStore.settings.forEach(function(item) {
+        if(self.treatment.indexOf(item.name) < 0 && item.status || self.treatment.indexOf(item.name) >= 0) {
+          merge.push(item.name);
+        }
+      })
+      return merge;
     },
     selectTreatment: function(treatmentSelected) {
       console.log("treatmentSelected");
