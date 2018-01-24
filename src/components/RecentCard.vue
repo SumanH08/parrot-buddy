@@ -15,6 +15,7 @@
           <div v-else="activeLevelLabel[activeLevel] == 'Missed'" class="logged-missed">{{activeLevelLabel[activeLevel]}}</div>
         </div>
         <span class="treatmentSelected" v-for="item in treatment">{{item}}</span>
+        <span class="treatmentSelected" v-for="item in this.SettingsStore.settings" v-if="item.status">{{item.name}}</span>
       </div>
     </div>
     <div v-else v-on:click="expandCard">
