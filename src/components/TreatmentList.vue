@@ -18,7 +18,7 @@
 
 <script>
 import Treatment from "./Treatment.vue"
-import Info from "./Info.vue"
+import Info from "./info.vue"
 import SettingsStore from "./../stores/SettingsStore.js"
 var TreatmentList = {
   name: "treatment-list",
