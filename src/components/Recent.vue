@@ -1,9 +1,6 @@
 <template>
   <div>
-    <p>
-      <recent-card v-for="item in RecentStore.recentItems" v-bind:date="item.date" v-bind:dayExists="item.dayExists" v-bind:dayType="item.dayType" v-bind:activeLevel="item.activeLevel" v-bind:treatment="item.treatment" v-bind:notes="item.notes" v-bind:key="item.date"></recent-card>
-
-    </p>
+    <recent-card v-for="item in RecentStore.recentItems" v-bind:date="item.date" v-bind:dayExists="item.dayExists" v-bind:dayType="item.dayType" v-bind:activeLevel="item.activeLevel" v-bind:treatment="item.treatment" v-bind:notes="item.notes" v-bind:key="item.date"></recent-card>
   </div>
 </template>
 

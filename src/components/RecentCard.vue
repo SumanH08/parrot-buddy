@@ -2,20 +2,26 @@
 <div class="recent">
   <div v-if="!isExpanded">
     <div class="logged-card row" v-if="dayExists" v-on:click="expandCard">
-      <div class="col-sm-2">
-        <div v-if="dayType == 'Good'" class="good-mood" v-html=dayTypeEmoji[dayType]></div>
-        <div v-else-if="dayType == 'Okay'" class="okay-mood" v-html=dayTypeEmoji[dayType]></div>
-        <div v-else="dayType == 'Mig'" class="bad-mood" v-html=dayTypeEmoji[dayType]></div>
-      </div>
-      <div class="col-sm-10">
-        <p style="margin: 6px;">{{ date | moment("dddd, MMMM D") }}</p>
-        <div class="activity-level-div">
-          <div v-if="activeLevelLabel[activeLevel] == 'Active'" class="logged-full">{{activeLevelLabel[activeLevel]}}</div>
-          <div v-else-if="activeLevelLabel[activeLevel] == 'Slower'" class="logged-half">{{activeLevelLabel[activeLevel]}}</div>
-          <div v-else="activeLevelLabel[activeLevel] == 'Missed'" class="logged-missed">{{activeLevelLabel[activeLevel]}}</div>
-        </div>
-        <span class="treatmentSelected" v-for="item in this.treatmentSelected">{{item}}</span>
-      </div>
+      <table style="width: 100%;">
+        <tbody>
+          <tr>
+            <td valign="top" style="width: 60px;">
+              <span v-if="dayType == 'Good'" class="good-mood" v-html="dayTypeEmoji[dayType]"></span>
+              <span v-else-if="dayType == 'Okay'" class="okay-mood" v-html="dayTypeEmoji[dayType]"></span>
+              <span v-else="dayType == 'Mig'" class="bad-mood" v-html="dayTypeEmoji[dayType]"></span>
+            </td>
+            <td>
+              <p style="margin: 6px;">{{ date | moment("dddd, MMMM D") }}</p>
+              <div class="activity-level-div">
+                <div v-if="activeLevelLabel[activeLevel] == 'Active'" class="logged-full">{{activeLevelLabel[activeLevel]}}</div>
+                <div v-else-if="activeLevelLabel[activeLevel] == 'Slower'" class="logged-half">{{activeLevelLabel[activeLevel]}}</div>
+                <div v-else="activeLevelLabel[activeLevel] == 'Missed'" class="logged-missed">{{activeLevelLabel[activeLevel]}}</div>
+              </div>
+              <span class="treatmentSelected" v-for="item in this.treatmentSelected">{{item}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <div class="logged-card unlogged-card" v-else v-on:click="expandCard">
@@ -28,14 +34,14 @@
     <table class="table recent-table">
       <tbody>
         <tr>
-          <td v-on:click="selectMood('Good')"><i class="fa fa-smile-o fa-3x" aria-hidden="true" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''"></i></td>
-          <td v-on:click="selectMood('Okay')" ><i class="fa fa-meh-o fa-3x" aria-hidden="true"  v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''"></i></td>
-          <td v-on:click="selectMood('Mig')" ><i class="fa fa-frown-o fa-3x" aria-hidden="true"  v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''"></i></td>
+          <td v-on:click="selectMood('Good')"><i class="fa fa-smile-o fa-4x" aria-hidden="true" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''"></i></td>
+          <td v-on:click="selectMood('Okay')" ><i class="fa fa-meh-o fa-4x" aria-hidden="true"  v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''"></i></td>
+          <td v-on:click="selectMood('Mig')" ><i class="fa fa-frown-o fa-4x" aria-hidden="true"  v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''"></i></td>
         </tr>
         <tr>
-          <td v-on:click="selectMood('Good')" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''">Good</td>
-          <td v-on:click="selectMood('Okay')" v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''">Okay</td>
-          <td v-on:click="selectMood('Mig')" v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''">Mig</td>
+          <td v-on:click="selectMood('Good')" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''">GOOD</td>
+          <td v-on:click="selectMood('Okay')" v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''">OKAY</td>
+          <td v-on:click="selectMood('Mig')" v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''">BAD</td>
         </tr>
       </tbody>
     </table>
@@ -49,10 +55,10 @@
             <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''"><i class="fa fa-battery-empty fa-3x" aria-hidden="true"></i></td>
           </tr>
           <tr>
-            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''">No</td>
-            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : ''">Slowed Down</i>
+            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''">NO</td>
+            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : ''">SLOWED DOWN</i>
             </td>
-            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''">Missed Actitivies</td>
+            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''">MISSED ACTIVITIES</td>
           </tr>
         </tbody>
       </table>
@@ -61,7 +67,7 @@
       <span class="removeTreatment" v-for="item in this.SettingsStore.settings" v-if="item.status && !showAll">{{item.name}}</span>
       <div v-on:click="showAllExpand()"><p class="show-all" v-if="!showAllClicked">Show All...</p><span v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
       <div><p class="headings" style="margin-top:24px">Notes</p><textarea v-model="message" rows="2" cols="50">Enter text here...</textarea></div>
-      <div>
+      <div style="text-align: right;">
         <button v-on:click="done"><i class="fa fa-star" aria-hidden="true"></i>Done!</button>
       </div>
     </div>
@@ -189,8 +195,9 @@ button i {
 }
 
 .headings {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
+  margin-bottom: 0;
 }
 
 .show-all {
@@ -232,16 +239,17 @@ button i {
   color: white;
   background-color: #37586C;
   border-radius: 6px;
-  margin: 0 3px 3px 3px;
+  margin: 3px;
   padding: 6px 12px 6px 12px;
 }
 
 .highlightTreatment {
   display: inline-block;
   background-color: #37586C;
+  border: 1px solid #37586C;
   color: white;
   border-radius: 6px;
-  margin: 0 3px 3px 3px;
+  margin: 3px;
   padding: 6px 12px 6px 12px;
 }
 
@@ -250,13 +258,13 @@ button i {
   color: white;
   border: 1px solid white;
   border-radius: 6px;
-  margin: 0 3px 3px 3px;
+  margin: 3px;
   padding: 6px 12px 6px 12px;
 }
 
 .logged-card {
   background-color: #323C4A;
-  margin: 12px;
+  margin: 0 0 12px 0;
   padding: 12px;
   border: 1px solid #585F66;
   border-radius: 6px;
@@ -288,7 +296,7 @@ button i {
   text-align: center;
 }
 .ask-how {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
 }

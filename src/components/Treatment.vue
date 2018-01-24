@@ -11,7 +11,7 @@
       <select @change="updateDropdown">
       <option v-bind:selected="dropdown == 'relief'? true : false" value="relief">Relief</option>
       <option v-bind:selected="dropdown == 'preventative'? true : false" value="preventative">Preventative</option>
-      <option v-bind:selected="dropdown == 'rescue'? true : false" value="rescue">Rescue</option>
+      <option v-bind:selected="dropdown == 'rescue'? true : false" value="rescue">Rescue Med</option>
       <option v-bind:selected="dropdown == 'others'? true : false" value="others">Others</option>
     </select>
       <div class="select_arrow">
@@ -53,6 +53,8 @@ export default Treatment;
   position: relative;
   display: inline-block;
   width: 100%;
+  min-width: 120px;
+  font-size: 14px;
 }
 
 .table td, .table th {
@@ -85,14 +87,14 @@ export default Treatment;
 
 .select_arrow {
   position: absolute;
-  top: 16px;
+  top: 14px;
   right: 15px;
   width: 0;
   height: 0;
   color: black;
   pointer-events: none;
   border-style: solid;
-  border-width: 8px 5px 0px 5px;
+  border-width: 6px 4px 0px 4px;
   border-color: #000 transparent transparent transparent;
 }
 

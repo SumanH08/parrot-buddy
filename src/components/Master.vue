@@ -40,7 +40,7 @@ export default Master;
   background-color: #48657C;
 }
 
-/* .backdrop {
+.backdrop {
   background-color: #48657C;
-} */
+}
 </style>
