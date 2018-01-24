@@ -2,12 +2,12 @@
 <div class="recent">
   <div v-if="!isExpanded">
     <div class="logged-card row" v-if="dayExists" v-on:click="expandCard">
-      <div class="col-sm">
+      <div class="col-sm-2">
         <div v-if="dayType == 'Good'" class="good-mood" v-html=dayTypeEmoji[dayType]></div>
         <div v-else-if="dayType == 'Okay'" class="okay-mood" v-html=dayTypeEmoji[dayType]></div>
         <div v-else="dayType == 'Mig'" class="bad-mood" v-html=dayTypeEmoji[dayType]></div>
       </div>
-      <div class="col-sm">
+      <div class="col-sm-10">
         <p>{{ date | moment("dddd, MMMM Do") }}</p>
         <div class="activity-level-div">
           <div v-if="activeLevelLabel[activeLevel] == 'Active'" class="logged-full">{{activeLevelLabel[activeLevel]}}</div>
@@ -27,9 +27,9 @@
     <table class="table">
       <tbody>
         <tr>
-          <td><i class="fa fa-smile-o fa-3x" aria-hidden="true"></i></td>
-          <td><i class="fa fa-meh-o fa-3x" aria-hidden="true"></i></td>
-          <td><i class="fa fa-frown-o fa-3x" aria-hidden="true"></i></td>
+          <td v-on:click="selectMood('Good')"><i class="fa fa-smile-o fa-3x" aria-hidden="true" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''"></i></td>
+          <td v-on:click="selectMood('Okay')" ><i class="fa fa-meh-o fa-3x" aria-hidden="true"  v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''"></i></td>
+          <td v-on:click="selectMood('Mig')" ><i class="fa fa-frown-o fa-3x" aria-hidden="true"  v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''"></i></td>
         </tr>
         <tr>
           <td v-on:click="selectMood('Good')" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''">Good</td>
@@ -43,19 +43,20 @@
       <table class="table">
         <tbody>
           <tr>
-            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'activeLevelFull' : ''"><i class="fa fa-battery-full" aria-hidden="true"></i></td>
-            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'activeLevelHalf' : ''"><i class="fa fa-battery-half" aria-hidden="true"></i></td>
-            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'activeLevelNone' : ''"><i class="fa fa-battery-empty" aria-hidden="true"></i></td>
+            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''"><i class="fa fa-battery-full fa-3x" aria-hidden="true"></i></td>
+            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : ''"><i class="fa fa-battery-half fa-3x" aria-hidden="true"></i></td>
+            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''"><i class="fa fa-battery-empty fa-3x" aria-hidden="true"></i></td>
           </tr>
           <tr>
-            <td>No</td>
-            <td>Slowed Down</i>
+            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''">No</td>
+            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : ''">Slowed Down</i>
             </td>
-            <td>Missed Actitivies</td>
+            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''">Missed Actitivies</td>
           </tr>
         </tbody>
       </table>
-      <button v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</button>
+      <p>Treatment(s) Used </p>
+      <span v-on:click="showAllExpand()">Show All...<button v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</button></span>
       <div><textarea v-model="message" rows="4" cols="50">Enter text here...</textarea></div>
       <div>
         <button v-on:click="done">Done</button>
@@ -67,6 +68,7 @@
 
 <script>
 import SettingsStore from "./../stores/SettingsStore.js"
+import RecentStore from "./../stores/RecentStore.js"
 
 var RecentCard = {
   name: "recent-card",
@@ -78,6 +80,7 @@ var RecentCard = {
       activeLevelSelected: "Full",
       treatmentSelected: [],
       message: "",
+      showAll: false,
       activeLevelLabel: {
         'Full': 'Active',
         'Half': 'Slower',
@@ -111,6 +114,9 @@ var RecentCard = {
       this.activeLevelSelected = activeLevelSelected;
       console.log(activeLevelSelected);
     },
+    showAllExpand: function() {
+      this.showAll = true;
+    },
     selectTreatment: function(treatmentSelected) {
       if (this.treatmentSelected.indexOf(treatmentSelected) < 0) {
         this.treatmentSelected.push(treatmentSelected);
@@ -133,6 +139,7 @@ var RecentCard = {
         treatmentSelected: this.treatmentSelected,
         message: this.message
       }
+      RecentStore.putRecentToAPI(treatmentObj);
       this.$toasted.show("Changes to " + this.date + " are saved");
       console.log(treatmentObj);
       this.isExpanded = false;

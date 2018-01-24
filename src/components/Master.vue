@@ -19,11 +19,17 @@
 <script>
 import Settings from "./Settings.vue"
 import Recent from "./Recent.vue"
+import SettingsStore from "./../stores/SettingsStore"
+import RecentStore from "./../stores/RecentStore"
 var Master = {
   name: "master",
   components: {
     "Settings": Settings,
     "Recent": Recent
+  },
+  created: function() {
+    SettingsStore.getSettingsFromAPI();
+    RecentStore.getRecentFromAPI();
   }
 }
 export default Master;
