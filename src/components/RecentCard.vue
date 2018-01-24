@@ -40,7 +40,7 @@
       </tbody>
     </table>
     <div v-if="moodSelected">
-      <p>Were your activities affected?</p>
+      <p class="headings">Were your activities affected?</p>
       <table class="table">
         <tbody>
           <tr>
@@ -56,11 +56,11 @@
           </tr>
         </tbody>
       </table>
-      <p>Treatment(s) Used </p>
-      <span v-if="!showAll" class="treatmentSelected" v-for="item in this.treatment">{{item}}</span>
-      <span class="treatmentSelected" v-for="item in this.SettingsStore.settings" v-if="item.status && !showAll">{{item.name}}</span>
-      <div v-on:click="showAllExpand()"><span v-if="!showAllClicked">Show All...</span><span class="treatmentSelected" v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
-      <div><textarea v-model="message" rows="4" cols="50">Enter text here...</textarea></div>
+      <p class="headings">Treatment(s) Used </p>
+      <span v-if="!showAll" class="highlightTreatment" v-for="item in this.treatment">{{item}}</span>
+      <span class="removeTreatment" v-for="item in this.SettingsStore.settings" v-if="item.status && !showAll">{{item.name}}</span>
+      <div v-on:click="showAllExpand()"><p class="show-all" v-if="!showAllClicked">Show All...</p><span v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
+      <div><p class="headings" style="margin-top:24px">Notes</p><textarea v-model="message" rows="2" cols="50">Enter text here...</textarea></div>
       <div>
         <button v-on:click="done"><i class="fa fa-star" aria-hidden="true"></i>Done!</button>
       </div>
@@ -164,6 +164,13 @@ td {
   text-align: center;
 }
 
+textarea {
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+  padding: 12px;
+}
+
 button {
   color: white;
   background-color: #52E0D1;
@@ -178,6 +185,18 @@ button i {
   color: #FBD751;
   padding: 0 6px 0 0;
 }
+
+.headings {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.show-all {
+  text-align: center;
+  color: #52E0D1;
+  font-size: 18px;
+}
+
 .recent {
   color: white;
 }
@@ -216,11 +235,21 @@ button i {
 }
 
 .highlightTreatment {
-  color: red;
+  display: inline-block;
+  background-color: #37586C;
+  color: white;
+  border-radius: 6px;
+  margin: 0 3px 3px 3px;
+  padding: 6px 12px 6px 12px;
 }
 
 .removeTreatment {
-  color: grey;
+  display: inline-block;
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  margin: 0 3px 3px 3px;
+  padding: 6px 12px 6px 12px;
 }
 
 .logged-card {
@@ -257,6 +286,8 @@ button i {
   text-align: center;
 }
 .ask-how {
+  font-size: 24px;
+  font-weight: bold;
   text-align: center;
 }
 
