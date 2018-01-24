@@ -8,22 +8,22 @@
         <div v-else="dayType == 'Mig'" class="bad-mood" v-html=dayTypeEmoji[dayType]></div>
       </div>
       <div class="col-sm-10">
-        <p>{{ date | moment("dddd, MMMM Do") }}</p>
+        <p style="margin: 6px;">{{ date | moment("dddd, MMMM D") }}</p>
         <div class="activity-level-div">
           <div v-if="activeLevelLabel[activeLevel] == 'Active'" class="logged-full">{{activeLevelLabel[activeLevel]}}</div>
           <div v-else-if="activeLevelLabel[activeLevel] == 'Slower'" class="logged-half">{{activeLevelLabel[activeLevel]}}</div>
           <div v-else="activeLevelLabel[activeLevel] == 'Missed'" class="logged-missed">{{activeLevelLabel[activeLevel]}}</div>
         </div>
-        <span class="treatmentSelected" v-for="item in treatment">{{item}}</span>
-        <span class="treatmentSelected" v-for="item in this.SettingsStore.settings" v-if="item.status">{{item.name}}</span>
+        <span class="treatmentSelected" v-for="item in this.treatmentSelected">{{item}}</span>
       </div>
     </div>
-    <div v-else v-on:click="expandCard">
-      <i class="fa fa-question-circle" aria-hidden="true"></i>
+
+    <div class="logged-card unlogged-card" v-else v-on:click="expandCard">
+      <i class="fa fa-question-circle fa-1x" aria-hidden="true"></i>
       <span>How was your {{date}}?</span>
     </div>
   </div>
-  <div v-if="isExpanded">
+  <div class="logged-card" v-if="isExpanded">
     <div class="ask-how">How was your {{ date | moment("dddd, MMMM Do") }}?</div>
     <table class="table">
       <tbody>
@@ -62,7 +62,7 @@
       <div v-on:click="showAllExpand()">Show All...<span class="treatmentSelected" v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
       <div><textarea v-model="message" rows="4" cols="50">Enter text here...</textarea></div>
       <div>
-        <button v-on:click="done">Done</button>
+        <button v-on:click="done"><i class="fa fa-star" aria-hidden="true"></i>Done!</button>
       </div>
     </div>
   </div>
@@ -117,9 +117,12 @@ var RecentCard = {
       console.log(activeLevelSelected);
     },
     showAllExpand: function() {
+      console.log("This is showall");
           this.showAll = true;
     },
     selectTreatment: function(treatmentSelected) {
+      console.log("treatmentSelected");
+      console.log(treatmentSelected);
       if (this.treatmentSelected.indexOf(treatmentSelected) < 0) {
         this.treatmentSelected.push(treatmentSelected);
         console.log("pushed into array");
@@ -143,6 +146,7 @@ var RecentCard = {
       }
       RecentStore.putRecentToAPI(treatmentObj);
       this.$toasted.show("Changes to " + this.date + " are saved");
+      console.log("This is my tt obj");
       console.log(treatmentObj);
       this.isExpanded = false;
     }
@@ -153,6 +157,25 @@ export default RecentCard;
 </script>
 
 <style>
+td {
+  width: 100px;
+  text-align: center;
+}
+
+button {
+  color: white;
+  background-color: #52E0D1;
+  border-color: #52E0D1;
+  border-radius: 6px;
+  margin: 3px;
+  padding: 6px 12px 6px 12px;
+  cursor: pointer;
+}
+
+button i {
+  color: #FBD751;
+  padding: 0 6px 0 0;
+}
 .recent {
   color: white;
 }
@@ -186,7 +209,7 @@ export default RecentCard;
   color: white;
   background-color: #37586C;
   border-radius: 6px;
-  margin: 3px;
+  margin: 0 3px 3px 3px;
   padding: 6px 12px 6px 12px;
 }
 
@@ -206,18 +229,26 @@ export default RecentCard;
   border-radius: 6px;
   cursor: pointer;
 }
+.unlogged-card {
+  background-color: #3A4A5A !important;
+  color: #BAC1C6;
+  text-align: center;
+}
 
 .logged-full {
   background-color: #A5D4DC;
   border-radius: 6px;
+  margin: 6px;
 }
 .logged-half {
   background-color: #F09F5A;
   border-radius: 6px;
+  margin: 6px;
 }
 .logged-missed {
   background-color: #FBD751;
   border-radius: 6px;
+  margin: 6px;
 }
 
 .activity-level-div {

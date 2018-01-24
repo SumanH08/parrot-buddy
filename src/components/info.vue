@@ -14,6 +14,7 @@ export default Info;
 
 <style>
 .info {
+  color: #BAC1C6;
   background-color: #2C343E;
   text-align: center;
   border: 1px solid;

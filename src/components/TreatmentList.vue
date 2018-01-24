@@ -53,6 +53,6 @@ export default TreatmentList;
 }
 
 .table td {
-  border-top: 0.1px solid #eceeef;
+  border-top: 0.1px solid rgba(255,255,255,.25);
 }
 </style>
