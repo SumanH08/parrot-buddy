@@ -38,6 +38,7 @@ var Treatment = {
     },
     updateDropdown: function(val) {
       var settingsUpdateObj = {
+        status: this.toggle,
         name: this.treatment,
         customType: val.target.value
       }

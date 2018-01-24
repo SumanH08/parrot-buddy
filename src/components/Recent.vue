@@ -21,3 +21,18 @@ export default {
   }
 }
 </script>
+
+<style>
+.toasted-container {
+  width: 80%;
+}
+
+.toasted {
+  padding: 12px;
+}
+
+.toasted.primary {
+  min-height: 48px;
+  border-radius: 6px;
+}
+</style>

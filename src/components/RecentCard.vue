@@ -34,14 +34,14 @@
     <table class="table recent-table">
       <tbody>
         <tr>
-          <td v-on:click="selectMood('Good')"><i class="fa fa-smile-o fa-4x" aria-hidden="true" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''"></i></td>
-          <td v-on:click="selectMood('Okay')" ><i class="fa fa-meh-o fa-4x" aria-hidden="true"  v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''"></i></td>
-          <td v-on:click="selectMood('Mig')" ><i class="fa fa-frown-o fa-4x" aria-hidden="true"  v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''"></i></td>
+          <td v-on:click="selectMood('Good')"><i class="fa fa-smile-o fa-4x" aria-hidden="true" v-bind:class="moodClass('good-mood')"></i></td>
+          <td v-on:click="selectMood('Okay')" ><i class="fa fa-meh-o fa-4x" aria-hidden="true"  v-bind:class="moodClass('okay-mood')"></i></td>
+          <td v-on:click="selectMood('Mig')" ><i class="fa fa-frown-o fa-4x" aria-hidden="true"  v-bind:class="moodClass('bad-mood')"></i></td>
         </tr>
         <tr>
-          <td v-on:click="selectMood('Good')" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''">GOOD</td>
-          <td v-on:click="selectMood('Okay')" v-bind:class="moodSelected == 'Okay' ? 'okay-mood' : ''">OKAY</td>
-          <td v-on:click="selectMood('Mig')" v-bind:class="moodSelected == 'Mig' ? 'bad-mood' : ''">BAD</td>
+          <td v-on:click="selectMood('Good')" v-bind:class="moodClass('good-mood')">GOOD</td>
+          <td v-on:click="selectMood('Okay')" v-bind:class="moodClass('okay-mood')">OKAY</td>
+          <td v-on:click="selectMood('Mig')" v-bind:class="moodClass('bad-mood')">BAD</td>
         </tr>
       </tbody>
     </table>
@@ -50,15 +50,15 @@
       <table class="table recent-table">
         <tbody>
           <tr>
-            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''"><i class="fa fa-battery-full fa-3x" aria-hidden="true"></i></td>
-            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : ''"><i class="fa fa-battery-half fa-3x" aria-hidden="true"></i></td>
-            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''"><i class="fa fa-battery-empty fa-3x" aria-hidden="true"></i></td>
+            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : 'disabled-mood'"><i class="fa fa-battery-full fa-3x" aria-hidden="true"></i></td>
+            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : 'disabled-mood'"><i class="fa fa-battery-half fa-3x" aria-hidden="true"></i></td>
+            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : 'disabled-mood'"><i class="fa fa-battery-empty fa-3x" aria-hidden="true"></i></td>
           </tr>
           <tr>
-            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''">NO</td>
-            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : ''">SLOWED DOWN</i>
+            <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : 'disabled-mood'">NO</td>
+            <td v-on:click="setActivityLevel('Half')" v-bind:class="activeLevelSelected == 'Half' ? 'okay-mood' : 'disabled-mood'">SLOWED DOWN</i>
             </td>
-            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : ''">MISSED ACTIVITIES</td>
+            <td v-on:click="setActivityLevel('None')" v-bind:class="activeLevelSelected == 'None' ? 'bad-mood'  : 'disabled-mood'">MISSED ACTIVITIES</td>
           </tr>
         </tbody>
       </table>
@@ -117,6 +117,23 @@ var RecentCard = {
     selectMood: function(mood) {
       this.moodSelected = mood;
       console.log(mood);
+    },
+
+    moodClass: function(toCheck) {
+      // moodSelected == 'Good' ? 'good-mood': 'disabled-mood'
+      if(this.moodSelected == 'Good' && toCheck == 'good-mood') {
+        return 'good-mood';
+      } else if(this.moodSelected == 'Okay' && toCheck == 'okay-mood') {
+        return 'okay-mood'
+      } else if(this.moodSelected == 'Mig' && toCheck == 'bad-mood') {
+        return 'bad-mood'
+      } else if(!this.moodSelected) {
+        return toCheck
+      } else if(this.moodSelected) {
+        return 'disabled-mood'
+      } else {
+        return ""
+      }
     },
     setActivityLevel: function(activeLevelSelected) {
       this.activeLevelSelected = activeLevelSelected;
@@ -229,6 +246,10 @@ button i {
 
 .bad-mood {
   color: #F09F5A;
+}
+
+.disabled-mood {
+  opacity: 0.3;
 }
 
 .activeLevelFull {
