@@ -1,7 +1,7 @@
 <template>
 <div class="recent">
   <div v-if="!isExpanded">
-    <div class="logged-card row" v-if="dayExists" v-on:click="expandCard">
+    <div class="logged-card" v-if="dayExists" v-on:click="expandCard">
       <table style="width: 100%;">
         <tbody>
           <tr>
@@ -26,11 +26,11 @@
 
     <div class="logged-card unlogged-card" v-else v-on:click="expandCard">
       <i class="fa fa-question-circle fa-1x" aria-hidden="true"></i>
-      <span>How was your {{date}}?</span>
+      <span>How was your {{ date | moment("dddd, MMMM D") }}?</span>
     </div>
   </div>
   <div class="logged-card" v-if="isExpanded">
-    <div class="ask-how">How was your {{ date | moment("dddd, MMMM Do") }}?</div>
+    <div class="ask-how">How was your {{ date | moment("dddd, MMMM D") }}?</div>
     <table class="table recent-table">
       <tbody>
         <tr>
@@ -310,17 +310,20 @@ button i {
 
 .logged-full {
   background-color: #A5D4DC;
+  padding: 3px;
   border-radius: 6px;
   margin: 6px;
 }
 .logged-half {
   background-color: #FBD751;
   border-radius: 6px;
+  padding: 3px;
   margin: 6px;
 }
 .logged-missed {
   background-color: #F09F5A;
   border-radius: 6px;
+  padding: 3px;
   margin: 6px;
 }
 
