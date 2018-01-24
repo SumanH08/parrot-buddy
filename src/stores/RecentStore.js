@@ -53,7 +53,7 @@ var RecentStore = {
   recentItems: [],
 
   getRecentFromAPI: function() {
-    var api = 'http://localhost:3000/api/recent';
+    var api = 'http://localhost:5000/api/recent';
     console.log("getting recent from api");
     var self = this;
     request(api, function (error, response, body) {
@@ -68,7 +68,7 @@ var RecentStore = {
   },
 
   putRecentToAPI: function(obj) {
-    var url = 'http://localhost:3000/api/recent';
+    var url = 'http://localhost:5000/api/recent';
     var options = {
       method: 'put',
       body: obj,

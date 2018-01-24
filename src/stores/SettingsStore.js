@@ -3,7 +3,7 @@ var SettingsStore = {
   settings: [],
 
   getSettingsFromAPI: function() {
-    var api = 'http://localhost:3000/api/settings';
+    var api = 'http://localhost:5000/api/settings';
     console.log("getting settings from api");
     var self = this;
     request(api, function (error, response, body) {
@@ -17,7 +17,7 @@ var SettingsStore = {
   },
 
   putSettingsToAPI: function(obj) {
-    var url = 'http://localhost:3000/api/settings';
+    var url = 'http://localhost:5000/api/settings';
     var options = {
       method: 'put',
       body: obj,
