@@ -57,9 +57,9 @@
         </tbody>
       </table>
       <p>Treatment(s) Used </p>
-      <span class="treatmentSelected" v-for="item in this.treatment">{{item}}</span>
-      <span class="treatmentSelected" v-for="item in this.SettingsStore.settings" v-if="item.status">{{item.name}}</span>
-      <div v-on:click="showAllExpand()">Show All...<span class="treatmentSelected" v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
+      <span v-if="!showAll" class="treatmentSelected" v-for="item in this.treatment">{{item}}</span>
+      <span class="treatmentSelected" v-for="item in this.SettingsStore.settings" v-if="item.status && !showAll">{{item.name}}</span>
+      <div v-on:click="showAllExpand()"><span v-if="!showAllClicked">Show All...</span><span class="treatmentSelected" v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
       <div><textarea v-model="message" rows="4" cols="50">Enter text here...</textarea></div>
       <div>
         <button v-on:click="done"><i class="fa fa-star" aria-hidden="true"></i>Done!</button>
@@ -84,6 +84,7 @@ var RecentCard = {
       treatmentSelected: [],
       message: "",
       showAll: false,
+      showAllClicked: false,
       activeLevelLabel: {
         'Full': 'Active',
         'Half': 'Slower',
@@ -119,6 +120,7 @@ var RecentCard = {
     showAllExpand: function() {
       console.log("This is showall");
           this.showAll = true;
+          this.showAllClicked = true;
     },
     selectTreatment: function(treatmentSelected) {
       console.log("treatmentSelected");
