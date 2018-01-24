@@ -2,8 +2,8 @@
 <div>
     <div class="feedback-card row">
       <!-- <div class="col-sm-3"></div> -->
-      <div class="col-sm"><i class="fa fa-comment-o fa-3x" aria-hidden="true"></i></div>
-      <div class="col-sm"><span>Have some feedback for us?<br><a href="#">Tap here</a> to drop us a note!</span></div>
+      <span style="margin-right:24px;"><i class="fa fa-comment-o fa-3x" aria-hidden="true"></i></span>
+      <span><b>Have some feedback for us?</b><br><a href="#">Tap here</a> to drop us a note!</span>
       <!-- <div class="col-sm-3"></div> -->
     </div>
   <div class="input-group">
@@ -23,7 +23,6 @@ export default Feedback;
 <style>
 .feedback-card {
   margin: auto;
-  text-align: center;
   border-radius: 6px;
   border: 1.5px solid;
   border-color: #365468;

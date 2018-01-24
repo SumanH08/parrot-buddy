@@ -25,7 +25,7 @@
   </div>
   <div class="logged-card" v-if="isExpanded">
     <div class="ask-how">How was your {{ date | moment("dddd, MMMM Do") }}?</div>
-    <table class="table">
+    <table class="table recent-table">
       <tbody>
         <tr>
           <td v-on:click="selectMood('Good')"><i class="fa fa-smile-o fa-3x" aria-hidden="true" v-bind:class="moodSelected == 'Good' ? 'good-mood' : ''"></i></td>
@@ -41,7 +41,7 @@
     </table>
     <div v-if="moodSelected">
       <p class="headings">Were your activities affected?</p>
-      <table class="table">
+      <table class="table recent-table">
         <tbody>
           <tr>
             <td v-on:click="setActivityLevel('Full')" v-bind:class="activeLevelSelected == 'Full' ? 'good-mood' : ''"><i class="fa fa-battery-full fa-3x" aria-hidden="true"></i></td>
@@ -72,7 +72,7 @@
 <script>
 import SettingsStore from "./../stores/SettingsStore.js"
 import RecentStore from "./../stores/RecentStore.js"
-
+import moment from "moment"
 var RecentCard = {
   name: "recent-card",
   props: ["date", "dayExists", "dayType", "activeLevel", "treatment", "notes"],
@@ -147,10 +147,11 @@ var RecentCard = {
         message: this.message
       }
       RecentStore.putRecentToAPI(treatmentObj);
-      this.$toasted.show("Changes to " + this.date + " are saved");
+      this.$toasted.show("Changes to " + moment(this.date).format("dddd, MMMM D") + " are saved");
       console.log("This is my tt obj");
       console.log(treatmentObj);
       this.isExpanded = false;
+      // this.showAll = false;
     }
   }
 }
@@ -159,9 +160,10 @@ export default RecentCard;
 </script>
 
 <style>
-td {
+.table.recent-table td {
   width: 100px;
   text-align: center;
+  border-top: None;
 }
 
 textarea {
@@ -263,7 +265,7 @@ button i {
 .unlogged-card {
   background-color: #3A4A5A !important;
   color: #BAC1C6;
-  text-align: center;
+  padding: 16px 24px;
 }
 
 .logged-full {
@@ -272,12 +274,12 @@ button i {
   margin: 6px;
 }
 .logged-half {
-  background-color: #F09F5A;
+  background-color: #FBD751;
   border-radius: 6px;
   margin: 6px;
 }
 .logged-missed {
-  background-color: #FBD751;
+  background-color: #F09F5A;
   border-radius: 6px;
   margin: 6px;
 }

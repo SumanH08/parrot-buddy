@@ -16,10 +16,11 @@ export default Info;
 .info {
   color: #BAC1C6;
   background-color: #2C343E;
-  text-align: center;
   border: 1px solid;
   border-color: #2C343E;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
+  padding: 12px;
+
 }
 </style>
