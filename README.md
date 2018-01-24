@@ -27,4 +27,9 @@ npm run e2e
 npm test
 ```
 
+## To run server
+```#mock server runs on 3000
+node api/index.js
+```
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
