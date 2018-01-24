@@ -56,7 +56,8 @@
         </tbody>
       </table>
       <p>Treatment(s) Used </p>
-      <span v-on:click="showAllExpand()">Show All...<button v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</button></span>
+      <span class="treatmentSelected" v-for="item in this.treatment">{{item}}</span>
+      <div v-on:click="showAllExpand()">Show All...<span class="treatmentSelected" v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
       <div><textarea v-model="message" rows="4" cols="50">Enter text here...</textarea></div>
       <div>
         <button v-on:click="done">Done</button>
@@ -115,7 +116,7 @@ var RecentCard = {
       console.log(activeLevelSelected);
     },
     showAllExpand: function() {
-      this.showAll = true;
+          this.showAll = true;
     },
     selectTreatment: function(treatmentSelected) {
       if (this.treatmentSelected.indexOf(treatmentSelected) < 0) {

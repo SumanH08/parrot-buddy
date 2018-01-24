@@ -62,7 +62,7 @@ var RecentStore = {
       } else {
         self.recentItems = JSON.parse(body);
       }
-
+      console.log("Printing recent store items");
       console.log(self.recentItems);
     });
   },
