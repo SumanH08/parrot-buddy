@@ -57,6 +57,7 @@
       </table>
       <p>Treatment(s) Used </p>
       <span class="treatmentSelected" v-for="item in this.treatment">{{item}}</span>
+      <span class="treatmentSelected" v-for="item in this.SettingsStore.settings" v-if="item.status">{{item.name}}</span>
       <div v-on:click="showAllExpand()">Show All...<span class="treatmentSelected" v-if="showAll" v-for="item in SettingsStore.settings" v-on:click="selectTreatment(item.name)" v-bind:class="highlightTreatmentSelected(item.name)">{{item.name}}</span></div>
       <div><textarea v-model="message" rows="4" cols="50">Enter text here...</textarea></div>
       <div>
@@ -105,7 +106,6 @@ var RecentCard = {
   methods: {
     expandCard: function() {
       this.isExpanded = true;
-      console.log(this.dayType);
     },
     selectMood: function(mood) {
       this.moodSelected = mood;

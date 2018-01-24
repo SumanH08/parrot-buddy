@@ -32,6 +32,7 @@ var Treatment = {
         customType: this.dropdown
       }
       SettingsStore.putSettingsToAPI(settingsObj);
+      console.log(settingsObj.status);
     },
     updateDropdown: function(val) {
       var settingsUpdateObj = {
