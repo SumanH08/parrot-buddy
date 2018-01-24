@@ -20,6 +20,7 @@
     "request": "^2.83.0",
     "vue": "^2.5.2",
     "vue-js-toggle-button": "^1.2.2",
+    "vue-moment": "^3.1.0",
     "vue-router": "^3.0.1",
     "vue-tabs-component": "^1.4.0",
     "vue-toasted": "^1.1.24"
